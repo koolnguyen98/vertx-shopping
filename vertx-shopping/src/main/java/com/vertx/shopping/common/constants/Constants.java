@@ -18,7 +18,7 @@ public class Constants {
 
   public static final String CONDITIONAL_TEMP = "[[CONDITIONAL]]";
 
-  public static final String EQUAL_TEMP = "`[[PARAM]]=?`";
+  public static final String EQUAL_TEMP = "'[[PARAM]]'=?";
 
   public static final String PARAM_TEMP = "[[PARAM]]";
 

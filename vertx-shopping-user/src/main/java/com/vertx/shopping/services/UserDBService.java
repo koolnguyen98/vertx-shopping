@@ -18,6 +18,9 @@ public interface UserDBService {
   String SERVICE_ADDRESS = "service.user";
 
   @Fluent
+  UserDBService initializePersistence();
+
+  @Fluent
   UserDBService getListUser(Handler<AsyncResult<List<User>>> resultHandler);
 
   @Fluent

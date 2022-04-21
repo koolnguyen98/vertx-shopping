@@ -19,7 +19,7 @@ public class BillDetail {
 
   private String productName;
 
-  private double price;
+  private double price = 0.0d;
 
   public BillDetail(JsonObject json) {
     BillDetailMapper.fromJson(json, this);

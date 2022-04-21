@@ -18,6 +18,9 @@ public interface BillDBService {
   String SERVICE_ADDRESS = "service.bill";
 
   @Fluent
+  BillDBService initializePersistence();
+
+  @Fluent
   BillDBService getAllBillForUser(String userID, Handler<AsyncResult<List<Bill>>> resultHandler);
 
   @Fluent

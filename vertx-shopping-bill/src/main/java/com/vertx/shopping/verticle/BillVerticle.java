@@ -1,6 +1,7 @@
 package com.vertx.shopping.verticle;
 
 import com.vertx.shopping.common.verticle.BaseVerticle;
+import com.vertx.shopping.services.Bill;
 import com.vertx.shopping.services.BillDBService;
 import com.vertx.shopping.services.BillService;
 import com.vertx.shopping.services.impl.BillDB;
@@ -28,8 +29,17 @@ public class BillVerticle extends BaseVerticle {
     new ServiceBinder(vertx).setAddress(SERVICE_ADDRESS)
                             .register(BillDBService.class, billDBService);
 
+//    initDatabase(billDBService)
+//      .compose(initDatabase ->
     publishEventBusService(SERVICE_NAME, SERVICE_ADDRESS, BillDBService.class)
       .compose(servicePublished -> deployRestVerticle());
+  }
+
+  private Future<Void> initDatabase(BillDBService service) {
+    Promise<Void> promise = Promise.promise();
+    Future<Void> initFuture = promise.future();
+    service.initializePersistence();
+    return promise.future().map(v -> null);
   }
 
   private Future<Void> deployRestVerticle() {

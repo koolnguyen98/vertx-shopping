@@ -28,8 +28,17 @@ public class UserVerticle extends BaseVerticle {
     new ServiceBinder(vertx).setAddress(SERVICE_ADDRESS)
                             .register(UserDBService.class, userDBService);
 
-    publishEventBusService(SERVICE_NAME, SERVICE_ADDRESS, UserDBService.class)
+//    initDatabase(userDBService)
+//      .compose(initDatabase ->
+        publishEventBusService(SERVICE_NAME, SERVICE_ADDRESS, UserDBService.class)
       .compose(servicePublished -> deployRestVerticle());
+  }
+
+  private Future<Void> initDatabase(UserDBService service) {
+    Promise<Void> promise = Promise.promise();
+    Future<Void> initFuture = promise.future();
+    service.initializePersistence();
+    return promise.future().map(v -> null);
   }
 
   private Future<Void> deployRestVerticle() {

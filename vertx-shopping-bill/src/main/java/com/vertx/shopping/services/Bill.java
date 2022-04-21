@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -22,9 +23,9 @@ public class Bill {
 
   private UUID userId;
 
-  private double amount;
+  private double amount = 0.0d;
 
-  private List<BillDetail> billDetais;
+  private List<BillDetail> billDetais = new ArrayList<>();
 
   public Bill(JsonObject json) {
     BillMapper.fromJson(json, this);

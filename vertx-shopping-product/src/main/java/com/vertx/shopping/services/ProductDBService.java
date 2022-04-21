@@ -5,6 +5,7 @@ import io.vertx.codegen.annotations.ProxyGen;
 import io.vertx.codegen.annotations.VertxGen;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public interface ProductDBService {
   String SERVICE_NAME = "product-eb-service";
 
   String SERVICE_ADDRESS = "service.product";
+
+  @Fluent
+  ProductDBService initializePersistence();
 
   @Fluent
   ProductDBService getListProduct(Handler<AsyncResult<List<Product>>> resultHandler);

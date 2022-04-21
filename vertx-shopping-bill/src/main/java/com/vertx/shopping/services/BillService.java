@@ -34,13 +34,15 @@ public class BillService extends BaseVerticle {
   }
 
   private void getAllBillForUser(RoutingContext routingContext) {
-    String id = String.valueOf(routingContext.queryParam("userId"));
+    String id = String.valueOf(routingContext.queryParam("userId").get(0));
+    LOGGER.info(id);
     billDBService.getAllBillForUser(id, prepareResponse(routingContext));
   }
 
   private void getBillDetail(RoutingContext routingContext) {
     String id = routingContext.pathParam("id");
-    String userId = String.valueOf(routingContext.queryParam("userId"));
+    String userId = String.valueOf(routingContext.queryParam("userId").get(0));
+    LOGGER.info(id + ":" + userId);
     billDBService.getBillDetail(id, userId, prepareResponse(routingContext));
   }
 
